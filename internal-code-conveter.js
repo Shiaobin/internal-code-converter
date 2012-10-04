@@ -3,10 +3,10 @@ function convertToInternalCode()
 {
 	var internalCode = new String();
 
-	if (base.radio[0].checked)
+	if (document.getElementById('binary').checked)
 	// 2 進位
 	{
-		if (encoding.radio[0].checked)
+		if (document.getElementById('big5').checked)
 		// Big5
 		{
 			var unicodeToBig5 = new Array();
@@ -16,24 +16,24 @@ function convertToInternalCode()
 				unicodeToBig5[Big5UnicodeTable[i][1]] = Big5UnicodeTable[i][0];
 			}
 
-			for (var i = 0; i < text.character.value.length; ++i)
+			for (var i = 0; i < document.getElementById('character').value.length; ++i)
 			{
-				internalCode += unicodeToBig5[text.character.value.charCodeAt(i)].toString(2) + " ";
+				internalCode += unicodeToBig5[document.getElementById('character').value.charCodeAt(i)].toString(2) + " ";
 			}
 		}
-		else if (encoding.radio[1].checked)
+		else if (document.getElementById('unicode').checked)
 		// Unicode
 		{
-			for (var i = 0; i < text.character.value.length; ++i)
+			for (var i = 0; i < document.getElementById('character').value.length; ++i)
 			{
-				internalCode += text.character.value.charCodeAt(i).toString(2) + " ";
+				internalCode += document.getElementById('character').value.charCodeAt(i).toString(2) + " ";
 			}
 		}
 	}
-	else if (base.radio[1].checked)
+	else if (document.getElementById('hexadecimal').checked)
 	// 16 進位
 	{
-		if (encoding.radio[0].checked)
+		if (document.getElementById('big5').checked)
 		// Big5
 		{
 			var unicodeToBig5 = new Array();
@@ -43,22 +43,22 @@ function convertToInternalCode()
 				unicodeToBig5[Big5UnicodeTable[i][1]] = Big5UnicodeTable[i][0];
 			}
 
-			for (var i = 0; i < text.character.value.length; ++i)
+			for (var i = 0; i < document.getElementById('character').value.length; ++i)
 			{
-				internalCode += "0x" + unicodeToBig5[text.character.value.charCodeAt(i)].toString(16).toUpperCase() + " ";
+				internalCode += "0x" + unicodeToBig5[document.getElementById('character').value.charCodeAt(i)].toString(16).toUpperCase() + " ";
 			}
 		}
-		else if (encoding.radio[1].checked)
+		else if (document.getElementById('unicode').checked)
 		// Unicode
 		{
-			for (var i = 0; i < text.character.value.length; ++i)
+			for (var i = 0; i < document.getElementById('character').value.length; ++i)
 			{
-				internalCode += "0x" + text.character.value.charCodeAt(i).toString(16).toUpperCase() + " ";
+				internalCode += "0x" + document.getElementById('character').value.charCodeAt(i).toString(16).toUpperCase() + " ";
 			}
 		}
 	}
 
-	text.code.value = internalCode.RTrim();
+	document.getElementById('code').value = internalCode.RTrim();
 }
 
 // 將內碼輸入框內容轉換成文字，輸出到文字輸入框。
@@ -67,12 +67,12 @@ function convertToCharacter()
 	var character = new String();
 	var internalCodeArray = new Array();
 
-	internalCodeArray = text.code.value.split(" ");
+	internalCodeArray = document.getElementById('code').value.split(" ");
 
-	if (base.radio[0].checked)
+	if (document.getElementById('binary').checked)
 	// 2 進位
 	{
-		if (encoding.radio[0].checked)
+		if (document.getElementById('big5').checked)
 		// Big5
 		{
 			var big5ToUnicode = new Array();
@@ -87,7 +87,7 @@ function convertToCharacter()
 				character += String.fromCharCode(big5ToUnicode[parseInt(internalCodeArray[i], 2)]);
 			}
 		}
-		else if (encoding.radio[1].checked)
+		else if (document.getElementById('unicode').checked)
 		// Unicode
 		{
 			for (var i = 0; i < internalCodeArray.length; ++i)
@@ -96,10 +96,10 @@ function convertToCharacter()
 			}
 		}
 	}
-	else if (base.radio[1].checked)
+	else if (document.getElementById('hexadecimal').checked)
 	// 16 進位
 	{
-		if (encoding.radio[0].checked)
+		if (document.getElementById('big5').checked)
 		// Big5
 		{
 			var big5ToUnicode = new Array();
@@ -114,7 +114,7 @@ function convertToCharacter()
 				character += String.fromCharCode(big5ToUnicode[parseInt(internalCodeArray[i], 16)]);
 			}
 		}
-		else if (encoding.radio[1].checked)
+		else if (document.getElementById('unicode').checked)
 		// Unicode
 		{
 			for (var i = 0; i < internalCodeArray.length; ++i)
@@ -124,7 +124,7 @@ function convertToCharacter()
 		}
 	}
 
-	text.character.value = character;
+	document.getElementById('character').value = character;
 }
 
 // 實作字串的 Trim(), LTrim(), RTrim() 方法。
