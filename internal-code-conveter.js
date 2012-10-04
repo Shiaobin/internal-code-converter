@@ -3,9 +3,19 @@ function convertToInternalCode()
 {
 	var internalCode = "";
 
-	for (var i = 0; i < text.character.value.length; ++i)
+	if (base.radio[0].checked)
 	{
-			internalCode += "0x" + text.character.value.charCodeAt(i).toString(16).toUpperCase() + " ";
+		for (var i = 0; i < text.character.value.length; ++i)
+		{
+				internalCode += text.character.value.charCodeAt(i).toString(2) + " ";
+		}
+	}
+	else if (base.radio[1].checked)
+	{
+		for (var i = 0; i < text.character.value.length; ++i)
+		{
+				internalCode += "0x" + text.character.value.charCodeAt(i).toString(16).toUpperCase() + " ";
+		}
 	}
 
 	text.code.value = internalCode.RTrim();
@@ -19,9 +29,19 @@ function convertToCharacter()
 
 	internalCodeArray = text.code.value.split(" ");
 
-	for (var i = 0; i < internalCodeArray.length; ++i)
+	if (base.radio[0].checked)
 	{
-		character += String.fromCharCode(internalCodeArray[i]);
+		for (var i = 0; i < internalCodeArray.length; ++i)
+		{
+			character += String.fromCharCode(parseInt(internalCodeArray[i], 2));
+		}
+	}
+	else if (base.radio[1].checked)
+	{
+		for (var i = 0; i < internalCodeArray.length; ++i)
+		{
+			character += String.fromCharCode(internalCodeArray[i]);
+		}
 	}
 
 	text.character.value = character;
