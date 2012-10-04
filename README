@@ -1,5 +1,4 @@
 在內碼與中文字元之間互相轉換。
-可轉換 Unicode 內碼。
-轉換 Big5 內碼尚未完成。
+可轉換 Big5 與 Unicode 內碼。
 
 可直接在 http://shiaobin.github.com/internal-code-converter/ 線上使用。
