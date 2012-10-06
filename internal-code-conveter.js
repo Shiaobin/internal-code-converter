@@ -1,5 +1,5 @@
 // 將文字輸入框內容轉換成內碼，輸出到內碼輸入框。
-function convertToInternalCode()
+var convertToInternalCode = function()
 {
 	var internalCode = new String();
 
@@ -9,12 +9,7 @@ function convertToInternalCode()
 		if (document.getElementById('big5').checked)
 		// Big5
 		{
-			var unicodeToBig5 = new Array();
-
-			for (var i = 0; i < Big5UnicodeTable.length; ++i)
-			{
-				unicodeToBig5[Big5UnicodeTable[i][1]] = Big5UnicodeTable[i][0];
-			}
+			var unicodeToBig5 = makeUnicodeToBig5Array();
 
 			for (var i = 0; i < document.getElementById('character').value.length; ++i)
 			{
@@ -36,12 +31,7 @@ function convertToInternalCode()
 		if (document.getElementById('big5').checked)
 		// Big5
 		{
-			var unicodeToBig5 = new Array();
-
-			for (var i = 0; i < Big5UnicodeTable.length; ++i)
-			{
-				unicodeToBig5[Big5UnicodeTable[i][1]] = Big5UnicodeTable[i][0];
-			}
+			var unicodeToBig5 = makeUnicodeToBig5Array();
 
 			for (var i = 0; i < document.getElementById('character').value.length; ++i)
 			{
@@ -59,10 +49,10 @@ function convertToInternalCode()
 	}
 
 	document.getElementById('code').value = internalCode.RTrim();
-}
+};
 
 // 將內碼輸入框內容轉換成文字，輸出到文字輸入框。
-function convertToCharacter()
+var convertToCharacter = function()
 {
 	var character = new String();
 	var internalCodeArray = new Array();
@@ -75,12 +65,7 @@ function convertToCharacter()
 		if (document.getElementById('big5').checked)
 		// Big5
 		{
-			var big5ToUnicode = new Array();
-
-			for (var i = 0; i < Big5UnicodeTable.length; ++i)
-			{
-				big5ToUnicode[Big5UnicodeTable[i][0]] = Big5UnicodeTable[i][1];
-			}
+			var big5ToUnicode = makeBig5ToUnicodeArray();
 
 			for (var i = 0; i < internalCodeArray.length; ++i)
 			{
@@ -102,12 +87,7 @@ function convertToCharacter()
 		if (document.getElementById('big5').checked)
 		// Big5
 		{
-			var big5ToUnicode = new Array();
-
-			for (var i = 0; i < Big5UnicodeTable.length; ++i)
-			{
-				big5ToUnicode[Big5UnicodeTable[i][0]] = Big5UnicodeTable[i][1];
-			}
+			var big5ToUnicode = makeBig5ToUnicodeArray();
 
 			for (var i = 0; i < internalCodeArray.length; ++i)
 			{
@@ -125,7 +105,33 @@ function convertToCharacter()
 	}
 
 	document.getElementById('character').value = character;
-}
+};
+
+// 利用 Big5UnicodeTable 製作 Unicode 轉 Big5 對照表
+var makeUnicodeToBig5Array = function()
+{
+	var unicodeToBig5 = new Array();
+
+	for (var i = 0; i < Big5UnicodeTable.length; ++i)
+	{
+		unicodeToBig5[Big5UnicodeTable[i][1]] = Big5UnicodeTable[i][0];
+	}
+
+	return unicodeToBig5;
+};
+
+// 利用 Big5UnicodeTable 製作 Big5 轉 Unicode 對照表
+var makeBig5ToUnicodeArray = function()
+{
+	var big5ToUnicode = new Array();
+
+	for (var i = 0; i < Big5UnicodeTable.length; ++i)
+	{
+		big5ToUnicode[Big5UnicodeTable[i][0]] = Big5UnicodeTable[i][1];
+	}
+
+	return big5ToUnicode;
+};
 
 // 實作字串的 Trim(), LTrim(), RTrim() 方法。
 // 來源：yaosansi's Blog-JavaScript去除空格的三种方法 (trim) http://www.yaosansi.com/post/304.html
